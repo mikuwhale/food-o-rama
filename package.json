@@ -1,0 +1,16 @@
+{
+	"name": "lunchdilemma",
+	"version": "0.2.0",
+	"engines": {
+		"node": "6.x",
+		"npm": "*"
+	},
+	"dependencies": {
+		"express": "4.x",
+		"handlebars": "4.x",
+		"consolidate": "0.14.x",
+		"foursquarevenues": "2.x",
+		"underscore":"1.8.x",
+		"cors":"2.7.x"
+	}
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+      <title>Lunch Dilemma</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <style type="text/css">
+        body {
+          color: #333;
+          font-family: "Helvetica", Arial, sans-serif;
+          font-size: 1em;
+          line-height: 1.8em;
+        }
+        hr {
+          border-top: none;
+          border-bottom: 1px solid #ccc;
+        }
+        a {
+          color: #089BFF;
+        }
+        a:visited {
+          color: #089BFF;
+        }
+        #map-canvas {
+          width: 100%;
+          height: 300px;
+        }
+        #lat, #lng {
+          visibility: hidden;
+          width: 0px;
+          height: 0px;
+          margin: 0px;
+          margin: 0px;
+        }
+      </style>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+      <script>
+        function initialize() {
+          var lat = document.getElementById('lat').textContent;
+          var lng = document.getElementById('lng').textContent;
+          var latlng = new google.maps.LatLng(lat, lng);
+          var mapOptions = {
+            zoom: 15,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+          var marker = new google.maps.Marker({
+              position: latlng,
+              map: map
+          });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <h3>Lunch today will be at</h3>
+
+      <h1>{{selected_place.venue.name}}</h1>
+      <p>
+        {{selected_place.venue.location.address}}<br>
+        {{selected_place.venue.location.crossStreet}}
+      </p>
+      <p>
+        <div id="map-canvas"></div>
+      </p>
+
+      <p>
+        Rating:
+        {{#if selected_place.venue.rating}}
+        {{selected_place.venue.rating}}
+        {{else}}
+        N/A
+        {{/if}} / 10
+      </p>
+
+      <p>
+        Checkins: {{selected_place.venue.stats.checkinsCount}}
+      </p>
+
+      <p>
+        <a href="{{selected_place.venue.canonicalUrl}}">{{selected_place.venue.canonicalUrl}}</a>
+      </p>
+    </div>
+    <div id="lat">{{selected_place.venue.location.lat}}</div>
+    <div id="lng">{{selected_place.venue.location.lng}}</div>
+    <div id="footer">
+      <hr>
+      <footer>
+        <small>Port &amp; Made with <a href="http://expressjs.com">express.js</a> by <a href="http://twitter.com/mikuwhale">@mikuwhale</a>. Inspired by <a href="https://github.com/shujin/fluentspacefood-o-rama">FluentSpaceFood-O-Rama</a><small>
+      </footer>
+    </div>
+  </body>
+</html>
